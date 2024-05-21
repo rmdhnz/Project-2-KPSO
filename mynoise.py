@@ -28,6 +28,10 @@ class NoiseForImage :
     self.image = random_noise(self.image,mode="speckle")
   def poisson_noise(self) : 
     self.image = random_noise(self.image,mode="poisson")
+  def salt_noise(self) :
+    self.image = random_noise(self.image,mode="salt")
+  def pepper_noise(self) :
+    self.image = random_noise(self.image,mode="pepper")
 
   def save(self,filename) : 
     io.imsave(filename,self.image)
