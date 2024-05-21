@@ -1,8 +1,7 @@
 import cv2 as cv
-from scipy import signal,ndimage
+from scipy import signal
 from skimage.util import random_noise
 from skimage import io
-import numpy as np
 class NoiseForImage : 
   def __init__(self,image_location) : 
     self.image = cv.imread(image_location)
