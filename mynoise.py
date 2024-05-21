@@ -2,6 +2,7 @@ import cv2 as cv
 from scipy import signal,ndimage
 from skimage.util import random_noise
 from skimage import io
+import numpy as np
 class NoiseForImage : 
   def __init__(self,image_location) : 
     self.image = cv.imread(image_location)
@@ -34,6 +35,10 @@ class NoiseForImage :
     self.image = random_noise(self.image,mode="salt")
   def pepper_noise(self) :
     self.image = random_noise(self.image,mode="pepper")
+  
+  def mse_value(self,actual,pred) : 
+    actual,pred = np.array(actual),np.array(pred)
+    return np.mean(np.square(actual-pred))
 
   def save(self,filename) : 
     io.imsave(filename,self.image)
