@@ -35,10 +35,6 @@ class NoiseForImage :
     self.image = random_noise(self.image,mode="salt")
   def pepper_noise(self) :
     self.image = random_noise(self.image,mode="pepper")
-  
-  def mse_value(self,actual,pred) : 
-    actual,pred = np.array(actual),np.array(pred)
-    return np.mean(np.square(actual-pred))
 
   def save(self,filename) : 
     io.imsave(filename,self.image)
