@@ -24,6 +24,8 @@ class NoiseForImage :
     self.image*=255
     self.image=self.image.astype('uint8')
   
+  def get_image_matrix(self) : 
+    return self.image
   def speckle_noise(self) : 
     self.image = random_noise(self.image,mode="speckle")
   def poisson_noise(self) : 
