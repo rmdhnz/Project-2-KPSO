@@ -16,7 +16,7 @@ class NoiseForImage :
     else :
       self.image=signal.wiener(self.image,(width,height))
   
-  def display(self,title="document") : 
+  def show(self,title="document") : 
     cv.imshow(title,self.image)
   
   def gaussian_noise(self,mean,var) :

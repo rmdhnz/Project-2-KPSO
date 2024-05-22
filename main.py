@@ -1,22 +1,22 @@
-import numpy as np
-from scipy.signal import wiener
-import matplotlib.pyplot as plt
-
-np.random.seed(0)  # Untuk hasil yang dapat direproduksi
-original_signal = np.sin(np.linspace(0, 2 * np.pi, 100))
-# Menambahkan noise Gaussian
-noisy_signal = original_signal + np.random.normal(0, 0.1, original_signal.shape)
-# Menerapkan filter Wiener
-filtered_signal = wiener(noisy_signal)
-
-plt.figure(figsize=(10, 6))
-
-plt.plot(original_signal, label='Original Signal', linestyle='--', color='green')
-plt.plot(noisy_signal, label='Noisy Signal', linestyle='-', color='red')
-plt.plot(filtered_signal, label='Filtered Signal (Wiener)', linestyle='-', color='blue')
-
-plt.legend()
-plt.title('Wiener Filter Implementation')
-plt.xlabel('Sample Index')
-plt.ylabel('Amplitude')
-plt.show()
+import cv2 as cv
+from criteria import SNR,PSNR,MSE,SSIM
+from mynoise import NoiseForImage
+img= NoiseForImage("./img/brain.jpg")
+img_natural = NoiseForImage("./img/brain.jpg")
+img_natural.grayscale_image()
+img.grayscale_image()
+img.gaussian_noise(0,0.05)
+# img.speckle_noise()
+img_natural.show()
+img.show("Noise image")
+value_img = img.get_image_matrix()
+value_natural_img = img_natural.get_image_matrix()
+mse_value = MSE(value_natural_img, value_img)
+psnr_value = PSNR(value_natural_img, value_img)
+SNR_value = SNR(value_natural_img, value_img)
+SSIM_value = SSIM(value_natural_img, value_img)
+print("MSE :",mse_value)
+print("PSNR :",psnr_value)
+print("SNR :",SNR_value)
+print(value_img)
+cv.waitKey(0)
