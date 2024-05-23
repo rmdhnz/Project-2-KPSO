@@ -1,5 +1,6 @@
 from skimage import io
 import numpy as np
+import cv2 as cv
 from skimage import restoration,color
 import matplotlib.pyplot as plt
 from skimage.util import random_noise
@@ -23,6 +24,16 @@ class ImageProcessing :
       self.img = random_noise(self.img,mode="gaussian")
     else:
       self.img = random_noise(self.img,mode="gaussian",mean=mean,var=var)
+  
+  def gaussian_blur(self) : 
+    self.img = cv.GaussianBlur(self.img,(7,7),0)
+  def save(self,filename) : 
+    gambar = self.img
+    gambar*=255
+    gambar = gambar.astype("uint8")
+    io.imsave(filename,gambar)
+  def wiener_filter(self) :
+    self.img = restoration.wiener(self.img,psf=self.__psf,balance=0.35)
   @property
   def get_matrix_img(self) : 
     return self.img
