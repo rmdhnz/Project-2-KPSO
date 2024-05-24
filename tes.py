@@ -8,9 +8,8 @@ from image_proccessing import ImageProcessing
 
 img = ImageProcessing("./img/squad-madrid.jpeg")
 img.grayscale()
-img.gaussian_noise(mean=0,var=0.05)
-img.gaussian_blur()
-img.save("./gaussian.jpg")
+img.speckle_noise(mean=0,var=0.05)
+img.save("./speckle.jpg")
 img.show()
 value_img = img.get_matrix_img
 print(value_img.shape)

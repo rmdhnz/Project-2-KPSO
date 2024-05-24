@@ -16,4 +16,6 @@ def MSE(original, predict):
 
 def SSIM(original,predict): 
   original,predict = np.array(original),np.array(predict)
-  return structural_similarity(original,predict)
+  max_val = max(original.max(),predict.max())
+  min_val = min(original.min(),predict.min())
+  return structural_similarity(original,predict,data_range=max_val-min_val)

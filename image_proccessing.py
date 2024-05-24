@@ -1,6 +1,7 @@
 from skimage import io
 import numpy as np
 import cv2 as cv
+from skimage.filters import median
 from skimage import restoration,color
 import matplotlib.pyplot as plt
 from skimage.util import random_noise
@@ -8,7 +9,7 @@ from skimage.util import random_noise
 class ImageProcessing : 
   def __init__(self,file_location) : 
     self.img = io.imread(file_location)
-    self.__k=5
+    self.__k=3
     self.__psf = np.ones((self.__k,self.__k))/(self.__k**2)
   
   def show(self) :
@@ -18,7 +19,17 @@ class ImageProcessing :
   
   def grayscale(self) : 
     self.img = color.rgb2gray(self.img)
+
+  def speckle_noise(self,mean=None,var=None) : 
+    if mean is None or var is None :
+      self.img = random_noise(self.img,mode="speckle")
+    else:
+      self.img = random_noise(self.img,mode="speckle",mean=mean,var=var)
+  def poisson_noise(self) : 
+    self.img = random_noise(self.img,mode="speckle",mean=0,var=0.05)
   
+  def snp_noise(self) :
+    self.img = random_noise(self.img,mode="s&p")
   def gaussian_noise(self,mean=None,var=None) :
     if mean is None or var is None :
       self.img = random_noise(self.img,mode="gaussian")
@@ -34,6 +45,8 @@ class ImageProcessing :
     io.imsave(filename,gambar)
   def wiener_filter(self) :
     self.img = restoration.wiener(self.img,psf=self.__psf,balance=0.35)
+  def median_filter(self) : 
+    return median(self.img)
   @property
   def get_matrix_img(self) : 
     return self.img

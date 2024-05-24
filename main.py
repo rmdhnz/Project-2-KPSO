@@ -1,23 +1,17 @@
-import cv2 as cv
-from criteria import SNR,PSNR,MSE,SSIM
-from mynoise import NoiseForImage
-img= NoiseForImage("./img/brain.jpg")
-img_natural = NoiseForImage("./img/brain.jpg")
-img_natural.grayscale_image()
-img.grayscale_image()
-img.gaussian_noise()
-# img.speckle_noise()
-img_natural.show()
-img.show("Noise image")
-value_img = img.get_image_matrix()
-value_natural_img = img_natural.get_image_matrix()
-mse_value = MSE(value_natural_img, value_img)
-psnr_value = PSNR(value_natural_img, value_img)
-SNR_value = SNR(value_natural_img, value_img)
-SSIM_value = SSIM(value_natural_img, value_img)
-print("MSE :",mse_value)
-print("PSNR :",psnr_value)
-print("SNR :",SNR_value)
-print("SSIM :",SSIM_value)
-print(value_img)
-cv.waitKey(0)
+from image_proccessing import ImageProcessing
+from criteria import MSE,PSNR,SNR,SSIM
+img = ImageProcessing("./img/madrid-fullhd.jpg")
+img.grayscale()
+img.snp_noise()
+# img.wiener_filter()
+# img.median_filter()
+# img.save("filtered-img.jpg")
+img.save("./snp_noise.jpg")
+img.show()
+exit()
+noised_img_value = noised_img.get_matrix_img
+natural_img_value = natural_img.get_matrix_img
+print("Mean Squared Error : {}".format(MSE(natural_img_value, noised_img_value)))
+print("PSNR : {}".format(PSNR(natural_img_value, noised_img_value)))
+print("SNR : {}".format(SNR(natural_img_value, noised_img_value)))
+print("SSIM : {}".format(SSIM(natural_img_value, noised_img_value)))
