@@ -44,7 +44,7 @@ class ImageProcessing :
     gambar = gambar.astype("uint8")
     io.imsave(filename,gambar)
   def wiener_filter(self) :
-    self.img = restoration.wiener(self.img,psf=self.__psf,balance=0.35)
+    self.img = restoration.wiener(self.img,psf=self.__psf,balance=0.5)
   def median_filter(self) : 
     return median(self.img)
   @property

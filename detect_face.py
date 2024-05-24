@@ -1,4 +1,5 @@
 import cv2 as cv
+import os
 import matplotlib.pyplot as plt
 face_ref = cv.CascadeClassifier("face_ref.xml")
 camera = cv.VideoCapture(0)
@@ -18,12 +19,15 @@ def close_window() :
   exit()
 def main() : 
   try : 
-    frame = cv.imread("./snp_noise.jpg")
-    drawer_box(frame)
-    plt.imshow(frame,cmap="gray")
-    plt.axis('off')
-    plt.show()
-    cv.waitKey(0)
+    if os.path.exists(image_location := "./img/snp-image.jpg") : 
+      frame = cv.imread(image_location)
+      drawer_box(frame)
+      plt.imshow(frame,cmap="gray")
+      plt.axis('off')
+      plt.show()
+      cv.waitKey(0)
+    else : 
+      print("No file found")
   except : 
     print("No face detection")
 if __name__ == "__main__":

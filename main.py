@@ -3,10 +3,9 @@ from criteria import MSE,PSNR,SNR,SSIM
 img = ImageProcessing("./img/madrid-fullhd.jpg")
 img.grayscale()
 img.snp_noise()
-# img.wiener_filter()
+img.wiener_filter()
 # img.median_filter()
-# img.save("filtered-img.jpg")
-img.save("./snp_noise.jpg")
+img.save("./img/snp-image.jpg")
 img.show()
 exit()
 noised_img_value = noised_img.get_matrix_img
