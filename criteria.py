@@ -19,3 +19,13 @@ def SSIM(original,predict):
   max_val = max(original.max(),predict.max())
   min_val = min(original.min(),predict.min())
   return structural_similarity(original,predict,data_range=max_val-min_val)
+
+if __name__ == "__main__":
+  from image_proccessing import ImageProcessing
+  gray_img  = ImageProcessing("./gray_img.jpg")
+  gauss_img = ImageProcessing("./img/median-snp.jpg")
+  gauss_img.show()
+  print("MSE : {:.2f}\n".format(MSE(gray_img.img,gauss_img.img)))
+  print("PSNR : {:.2f}\n".format(PSNR(gray_img.img,gauss_img.img)))
+  print("SNR : {:.2f}\n".format(SNR(gray_img.img,gauss_img.img)))
+  print("SSIM : {:.2f}\n".format(SSIM(gray_img.img,gauss_img.img)))

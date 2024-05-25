@@ -12,6 +12,15 @@ class ImageProcessing :
     self.__k=3
     self.__psf = np.ones((self.__k,self.__k))/(self.__k**2)
   
+  def shows(*objs) : 
+    k=1
+    for obj in objs : 
+      plt.subplot(1,len(objs),k)
+      k+=1
+      plt.imshow(obj.img,cmap="gray")
+      plt.axis('off')
+    plt.show()
+  
   def show(self) :
     plt.imshow(self.img,cmap="gray")
     plt.axis('off')
@@ -46,7 +55,7 @@ class ImageProcessing :
   def wiener_filter(self) :
     self.img = restoration.wiener(self.img,psf=self.__psf,balance=0.5)
   def median_filter(self) : 
-    return median(self.img)
+    self.img= median(self.img)
   @property
   def get_matrix_img(self) : 
     return self.img

@@ -10,17 +10,18 @@ def face_detection(frame) :
   return faces
 
 def drawer_box(frame) :  
-  for x,y,w,h in face_detection(frame) : 
+  for x,y,w,h in face_detection(frame) :
     cv.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),4)
 
 def close_window() :
   camera.release()
   cv.destroyAllWindows()
   exit()
-def main() : 
+def main() :
   try : 
-    if os.path.exists(image_location := "./img/snp-image.jpg") : 
-      frame = cv.imread(image_location)
+    if os.path.exists(image_location := "./img/median-snp.jpg") : 
+      frame = cv.imread(image_location) 
+      frame = cv.cvtColor(frame,cv.COLOR_RGB2BGR)
       drawer_box(frame)
       plt.imshow(frame,cmap="gray")
       plt.axis('off')
