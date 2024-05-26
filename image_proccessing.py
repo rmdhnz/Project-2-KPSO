@@ -1,7 +1,7 @@
 from skimage import io
 import numpy as np
 import cv2 as cv
-from skimage.filters import median
+from skimage.filters import median,butterworth
 from skimage import restoration,color
 import matplotlib.pyplot as plt
 from skimage.util import random_noise
@@ -56,6 +56,8 @@ class ImageProcessing :
     self.img = restoration.wiener(self.img,psf=self.__psf,balance=0.5)
   def median_filter(self) : 
     self.img= median(self.img)
+  def butterworth_filter(self,orde=2) : 
+    self.img = butterworth(self.img,order=orde)
   @property
   def get_matrix_img(self) : 
     return self.img

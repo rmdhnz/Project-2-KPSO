@@ -19,9 +19,9 @@ def close_window() :
   exit()
 def main() :
   try : 
-    if os.path.exists(image_location := "./img/median-snp.jpg") : 
+    if os.path.exists(image_location := "./img/snp-bw.png") : 
       frame = cv.imread(image_location) 
-      frame = cv.cvtColor(frame,cv.COLOR_RGB2BGR)
+      # frame = cv.cvtColor(frame,cv.COLOR_RGB2BGR)
       drawer_box(frame)
       plt.imshow(frame,cmap="gray")
       plt.axis('off')
