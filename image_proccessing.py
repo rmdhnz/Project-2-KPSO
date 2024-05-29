@@ -1,11 +1,12 @@
 from skimage import io
 import numpy as np
 import cv2 as cv
+from skimage.morphology import disk
 from skimage.filters import median,butterworth
 from skimage import restoration,color
 import matplotlib.pyplot as plt
 from skimage.util import random_noise
-
+from scipy.signal import wiener 
 class ImageProcessing : 
   def __init__(self,file_location) : 
     self.img = io.imread(file_location)
@@ -38,7 +39,7 @@ class ImageProcessing :
     self.img = random_noise(self.img,mode="speckle",mean=0,var=0.05)
   
   def snp_noise(self) :
-    self.img = random_noise(self.img,mode="s&p")
+    self.img = random_noise(self.img,mode="s&p",amount=0.05)
   def gaussian_noise(self,mean=None,var=None) :
     if mean is None or var is None :
       self.img = random_noise(self.img,mode="gaussian")
@@ -52,12 +53,17 @@ class ImageProcessing :
     gambar*=255
     gambar = gambar.astype("uint8")
     io.imsave(filename,gambar)
-  def wiener_filter(self) :
-    self.img = restoration.wiener(self.img,psf=self.__psf,balance=0.5)
+  def wiener_filter(self,balance_val=0.5) :
+    self.img = restoration.wiener(self.img,psf=self.__psf,balance=balance_val)
   def median_filter(self) : 
     self.img= median(self.img)
   def butterworth_filter(self,orde=2) : 
     self.img = butterworth(self.img,order=orde)
+  
+  def median_modified_wiener_filter(self,median_size=3,wiener_size=3) :
+    self.img = median(self.img,disk(median_size))
+    self.img = wiener(self.img,mysize=wiener_size)
+
   @property
   def get_matrix_img(self) : 
     return self.img
