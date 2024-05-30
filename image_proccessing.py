@@ -38,8 +38,8 @@ class ImageProcessing :
   def poisson_noise(self) : 
     self.img = random_noise(self.img,mode="speckle",mean=0,var=0.05)
   
-  def snp_noise(self) :
-    self.img = random_noise(self.img,mode="s&p",amount=0.05)
+  def snp_noise(self,amount=0.05) :
+    self.img = random_noise(self.img,mode="s&p",amount=amount)
   def gaussian_noise(self,mean=None,var=None) :
     if mean is None or var is None :
       self.img = random_noise(self.img,mode="gaussian")

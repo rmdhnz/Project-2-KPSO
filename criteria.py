@@ -23,13 +23,8 @@ def SSIM(original,predict):
 if __name__ == "__main__":
   from image_proccessing import ImageProcessing
   gray_img  = ImageProcessing("./gray_img.jpg")
-  gauss_img = ImageProcessing("./img/madrid-fullhd.jpg")
-  gauss_img.grayscale()
-  gauss_img.snp_noise()
-  gauss_img.butterworth_filter()
-  gauss_img.img*=255
-  gauss_img.img = np.array(gauss_img.img)
-  gauss_img.img=gauss_img.img.astype(np.uint8)
+  gauss_img = ImageProcessing("./img/mmwf-gauss.jpg")
+  ImageProcessing.shows(gray_img,gauss_img)
   print("MSE : {:.2f}\n".format(MSE(gray_img.img,gauss_img.img)))
   print("PSNR : {:.2f}\n".format(PSNR(gray_img.img,gauss_img.img)))
   print("SNR : {:.2f}\n".format(SNR(gray_img.img,gauss_img.img)))

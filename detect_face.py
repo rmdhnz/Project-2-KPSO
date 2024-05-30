@@ -19,7 +19,7 @@ def close_window() :
   exit()
 def main() :
   try : 
-    if os.path.exists(image_location := "./poisson.jpg") : 
+    if os.path.exists(image_location := "./snp_noise_big.jpg") : 
       frame = cv.imread(image_location) 
       # frame = cv.cvtColor(frame,cv.COLOR_RGB2BGR)
       drawer_box(frame)
